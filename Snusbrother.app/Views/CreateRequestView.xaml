@@ -1,0 +1,19 @@
+﻿<Page
+    x:Class="Snusbrothers.app.views.CreateRequestView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Snusbrothers.app.views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="SkyBlue">
+        <TextBlock FontSize="40" Text="Become a snusbrother" Margin="30, 0, 0, 0"  Width="400"/>
+        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0, 50, 0, 0" Width="530">
+            <TextBox Name="SnusNameTextBlock" PlaceholderText="Snus-Name" Margin="30, 10, 0, 10" Width="250" Text="{Binding RequestedSnus, Mode=TwoWay}"/>
+            <TextBox Name="Amount" PlaceholderText="Amount" Margin="30, 10, 0, 10" Width="250" Text="{Binding Amount, Mode=TwoWay}"/>
+            <Button Name="CreateRequestButton" Content="Create Request" Background="#676566" HorizontalAlignment="Center" Margin="30, 10, 0, 10" Width="250" Command="{Binding CreateRequestCommand, Mode=TwoWay}"/>
+            <TextBlock FontSize="20" Text="{Binding ErrorMessage, Mode=OneWay}" HorizontalAlignment="Center" Margin="30, 10, 0, 10"  Width="500"/>
+        </StackPanel>
+    </Grid>
+</Page>

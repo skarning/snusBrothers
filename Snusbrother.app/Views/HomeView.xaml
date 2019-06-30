@@ -1,0 +1,60 @@
+﻿<Page
+    x:Class="Snusbrothers.app.views.HomeView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Snusbrothers.app.views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
+    mc:Ignorable="d">
+    
+    <Grid Background="SkyBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="0" Grid.Row="0" BorderBrush="#5b92cb" BorderThickness="3 3 3 3" />
+        <Border Grid.Column="1" Grid.Row="0" BorderBrush="#5b92cb" BorderThickness="3 3 3 3" />
+        <StackPanel VerticalAlignment="Center"></StackPanel>
+        <Maps:MapControl
+            x:Name="NavigationMap"             
+            MapServiceToken="dQCUCG9hsDHIeAHXN9Xq~2JyOWOUizU_Pl8w7l5-Usg~ApcMyOHSFFZnkxrvJL5iwOzrwe2ilN9YH8cHp22XpqERsfJLFby94EGDgOuVuMxK"
+            Grid.Column="1" Margin="0, 0, 5, 5"/>
+        <StackPanel Grid.Column="0">
+            <TextBlock Text="Notifcations"/>
+            <ListView x:Name = "RequestListView" BorderBrush="#5b92cb" BorderThickness="3 0 3 3" MinHeight="200" Height="300" ItemsSource="{Binding RequestList}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Height="110" Margin="6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="10,0,0,0">
+                                <TextBlock MaxHeight="60">
+                                    <Run Text="Username:" />
+                                    <Run Text="{Binding Profile}" />
+                                </TextBlock>
+                                <TextBlock MaxHeight="60">
+                                    <Run Text="Snus:" />
+                                    <Run Text="{Binding RequestedSnus}" />
+                                </TextBlock>
+                                <TextBlock MaxHeight="60">
+                                    <Run Text="Amount:" />
+                                    <Run Text="{Binding Amount}" />
+                                </TextBlock>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Content="Accept" MinHeight="50" MinWidth="300" Width="600" HorizontalAlignment="Center" Command="{Binding AcceptRequestCommand}" CommandParameter="{Binding ElementName=RequestListView, Path=SelectedItem}" />
+            <Button Content="Decline" MinHeight="50" MinWidth="300" Width="600" HorizontalAlignment="Center" Command="{Binding DeclineRequestCommand}" CommandParameter="{Binding ElementName=RequestListView, Path=SelectedItem}" />
+            <Button Content="Create" MinHeight="50" MinWidth="300" Width="600" HorizontalAlignment="Center" Command="{Binding CreateRequestCommand}" />
+            <Button Content="Cancel" MinHeight="50" MinWidth="300" Width="600" HorizontalAlignment="Center" Command="{Binding DeclineRequestCommand}" CommandParameter="{Binding ElementName=RequestListView, Path=SelectedItem}" />
+            <TextBlock FontSize="20" Text="{Binding ErrorMessage, Mode=OneWay}" HorizontalAlignment="Center" Margin="0, 10, 0, 10"  Width="500" TextAlignment="Center"/>
+        </StackPanel>
+        <Frame x:Name="CreateRequestFrame">
+        </Frame>
+    </Grid>
+</Page>

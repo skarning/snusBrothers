@@ -1,0 +1,42 @@
+﻿<Page
+    x:Class="Snusbrother.app.Views.MyStashView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:local="using:Snusbrother.app">
+
+    <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0, 50, 0, 0" Width="530" Background = "SkyBlue">
+        <StackPanel.Resources>
+            <local:StringToDoubleConverter x:Key="DoubleConverter" />
+        </StackPanel.Resources>
+        <TextBlock FontSize="40" Text="Add Snus To Stash" Margin="100, 0, 0, 0"  Width="400" HorizontalAlignment="Center" />
+        <TextBox Name="NameTextBlock" PlaceholderText="Product Name" Margin="30, 10, 0, 10" Width="250" HorizontalAlignment="Center" Text="{Binding Name, Mode=TwoWay}"/>
+        <TextBox Name="PriceTextBlock" PlaceholderText="Price" Margin="30, 10, 0, 10" Width="250" HorizontalAlignment="Center" Text="{Binding Price, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"/>
+        <ComboBox Margin="30, 10, 0, 10" HorizontalAlignment="Center" ItemsSource="{Binding SnusStrengths}" SelectedItem="{Binding Strength, Mode=TwoWay}"></ComboBox>
+        <Button Name="AddSnusButton" Content="Add" Background="#676566" HorizontalAlignment="Center" Margin="30, 10, 0, 10" Width="250" Command="{Binding AddSnusCommand, Mode=TwoWay}"/>
+        <TextBlock FontSize="20" Text="{Binding ErrorMessage, Mode=OneWay}" HorizontalAlignment="Center" Margin="30, 10, 0, 10"  Width="500"/>
+        <ListView x:Name = "MyStashListView" BorderBrush="#5b92cb" BorderThickness="3 3 3 3" MinHeight="50" Height="300" ItemsSource="{Binding MyStashList}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="10,30,0,0">
+                        <TextBlock MaxHeight="60">
+                                    <Run Text="Name:" />
+                                    <Run Text="{Binding Name}" />
+                        </TextBlock>
+                        <TextBlock MaxHeight="60">
+                                    <Run Text="Price:" />
+                                    <Run Text="{Binding Price}" />
+                        </TextBlock>
+                        <TextBlock MaxHeight="60">
+                                    <Run Text="Strength:" />
+                                    <Run Text="{Binding SnusStrength}" />
+                        </TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackPanel>
+</Page>
+
